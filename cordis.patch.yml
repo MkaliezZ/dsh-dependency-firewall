@@ -1,0 +1,3 @@
+- id: dsh-dependency-firewall
+  name: '@mkaliezz/dsh-dependency-firewall'
+  config: {}
