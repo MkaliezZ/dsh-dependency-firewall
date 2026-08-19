@@ -43,7 +43,9 @@ export function apply(ctx: any, config: { protectedTools?: string[] } = {}): voi
     const command = typeof call.arguments?.command === 'string' ? call.arguments.command : ''
     const result = classifyDependencyCommand(command)
     if (result.decision === 'ALLOW') return next()
-    if (result.decision === 'ASK') return { action: 'ask', reason: `dependency-firewall:${result.reasons.join(',')}` }
-    return { action: 'deny', reason: `dependency-firewall:${result.reasons.join(',')}` }
+    // PreToolDecision 契约使用 `kind` 而非 `action`：错误形状会让 waterfall
+    // 读取不到 decision.kind, 导致 BLOCK/ASK 拦截静默失效。
+    if (result.decision === 'ASK') return { kind: 'ask', reason: `dependency-firewall:${result.reasons.join(',')}` }
+    return { kind: 'deny', reason: `dependency-firewall:${result.reasons.join(',')}` }
   })
 }
