@@ -1,3 +1,4 @@
-- id: dsh-dependency-firewall
-  name: '@mkaliezz/dsh-dependency-firewall'
-  config: {}
+- insert:
+    - id: dsh-dependency-firewall
+      name: '@mkaliezz/dsh-dependency-firewall'
+      config: {}
